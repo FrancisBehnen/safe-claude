@@ -38,6 +38,14 @@ The installer will:
 
 Everything else (`model`, `enabledPlugins`, `statusLine`, etc.) is untouched.
 
+## Investigating a failed operation
+
+When a command is blocked by the sandbox and the unsandboxed retry succeeds:
+
+1. **Screenshot** — Take a screenshot showing both the failed (red) command and the successful (green) retry.
+2. **Diagnose** — Open Claude Code in the safe-claude repo and share the screenshot. Ask it why the original command was blocked and to fix it — either by adding a pattern to `rules/common/sandbox.md` or by updating `settings-overlay.json` (e.g. adding a path to the sandbox allowlist or a permission).
+3. **Sync** — Run `./sync.sh` to propagate the fix, then commit and push.
+
 ## Updating
 
 After editing `~/.claude/settings.json` or `~/.claude/rules/common/sandbox.md`, run:

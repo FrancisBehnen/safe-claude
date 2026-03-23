@@ -75,6 +75,12 @@ Blocked: `(cd /tmp && tar xzf archive.tar.gz)`
 Fix:     `tar xzf /tmp/archive.tar.gz -C /tmp`
 Why:     Subshell `()` with `cd` creates the same opaque-path problem as `&&` chains.
 
+### git commands that call getcwd()
+
+Blocked: `git status`
+Fix:     `git -C /absolute/path/to/repo status`
+Why:     The sandbox intercepts the `getcwd()` syscall. Using `-C` tells git the repo path explicitly, bypassing the syscall.
+
 ---
 
 ## Adding New Patterns
