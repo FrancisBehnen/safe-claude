@@ -47,7 +47,19 @@
       "Bash(which *)",
       "Bash(command *)",
       "Bash(* --version*)",
-      "Bash(* --help*)"
+      "Bash(* --help*)",
+      "Bash(mutagen *)",
+      "Bash(tmux *)"
+    ],
+    "deny": [
+      "Bash(rm --rm*)",
+      "Bash(rm --empty-trash*)",
+      "Read(~/.ssh/**)",
+      "Edit(~/.ssh/**)",
+      "Read(~/.gnupg/**)",
+      "Edit(~/.gnupg/**)",
+      "Read(/etc/**)",
+      "Edit(/etc/**)"
     ],
     "ask": [
       "Bash(git push --force*)",
@@ -61,6 +73,7 @@
       "Bash(mkfs *)",
       "Bash(dd if=*)",
       "Bash(ssh *)",
+      "Bash(tmux send-keys *)",
       "Bash(gh pr close*)",
       "Bash(gh pr merge*)",
       "Bash(gh issue close*)",
@@ -71,16 +84,6 @@
       "Bash(gh label delete*)",
       "Bash(gh api -X DELETE*)",
       "Bash(gh api --method DELETE*)"
-    ],
-    "deny": [
-      "Bash(rm --rm*)",
-      "Bash(rm --empty-trash*)",
-      "Read(~/.ssh/**)",
-      "Edit(~/.ssh/**)",
-      "Read(~/.gnupg/**)",
-      "Edit(~/.gnupg/**)",
-      "Read(/etc/**)",
-      "Edit(/etc/**)"
     ]
   },
   "sandbox": {

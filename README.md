@@ -38,6 +38,16 @@ The installer will:
 
 Everything else (`model`, `enabledPlugins`, `statusLine`, etc.) is untouched.
 
+## Updating
+
+After editing `~/.claude/settings.json` or `~/.claude/rules/common/sandbox.md`, run:
+
+```bash
+./sync.sh
+```
+
+This extracts `permissions` + `sandbox` from your live settings and copies the current sandbox rules into the repo, ready to commit.
+
 ## Uninstall
 
 The installer backs up your settings to `~/.claude/settings.json.bak` before merging. To revert:
