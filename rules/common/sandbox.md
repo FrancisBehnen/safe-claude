@@ -75,6 +75,12 @@ Blocked: `(cd /tmp && tar xzf archive.tar.gz)`
 Fix:     `tar xzf /tmp/archive.tar.gz -C /tmp`
 Why:     Subshell `()` with `cd` creates the same opaque-path problem as `&&` chains.
 
+### Chaining individually allowed commands with && or ;
+
+Blocked: `git -C /path/to/repo add file.txt && git -C /path/to/repo commit -m "msg"`
+Fix:     Run each command as a separate Bash call, or use `dangerouslyDisableSandbox: true`.
+Why:     The sandbox evaluates the full compound command as one unit. Even if each part would pass individually, the combined string may fail static analysis.
+
 ### git commands that call getcwd()
 
 Blocked: `git status`
