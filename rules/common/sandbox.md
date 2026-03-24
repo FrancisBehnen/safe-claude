@@ -77,9 +77,9 @@ Why:     Subshell `()` with `cd` creates the same opaque-path problem as `&&` ch
 
 ### git commands that call getcwd()
 
-Blocked: `git status` or `git -C /path/to/repo add file && git -C /path/to/repo commit`
-Fix:     Use `git -C` for standalone commands. For chained git operations (`&&`, `;`), use `dangerouslyDisableSandbox: true` — the sandbox blocks the entire chain even with `-C`.
-Why:     The sandbox intercepts the `getcwd()` syscall. `-C` bypasses it for single commands, but chained commands still trigger the block.
+Blocked: `git status`
+Fix:     `git -C /absolute/path/to/repo status`
+Why:     The sandbox intercepts the `getcwd()` syscall. Using `-C` tells git the repo path explicitly, bypassing the syscall.
 
 ---
 
