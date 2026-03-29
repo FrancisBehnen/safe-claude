@@ -49,11 +49,14 @@
       "Bash(* --version*)",
       "Bash(* --help*)",
       "Bash(mutagen *)",
-      "Bash(tmux *)"
+      "Bash(tmux *)",
+      "Bash(ssh *)"
     ],
     "deny": [
       "Bash(rm --rm*)",
       "Bash(rm --empty-trash*)",
+      "Bash(rm -rf //)",
+      "Bash(rm -rf ~/)",
       "Read(~/.ssh/**)",
       "Edit(~/.ssh/**)",
       "Read(~/.gnupg/**)",
@@ -72,7 +75,6 @@
       "Bash(chmod 7*)",
       "Bash(mkfs *)",
       "Bash(dd if=*)",
-      "Bash(ssh *)",
       "Bash(tmux send-keys *)",
       "Bash(gh pr close*)",
       "Bash(gh pr merge*)",
@@ -91,6 +93,7 @@
     "allowUnsandboxedCommands": true,
     "network": {
       "allowedDomains": [
+        "srv1407177.hstgr.cloud",
         "github.com",
         "api.github.com",
         "raw.githubusercontent.com"
@@ -106,21 +109,20 @@
         "~/.config",
         "~/.gitconfig",
         "~/.rm-safely-undo-stack",
-        "/tmp",
-        "/private/tmp"
+        "~/.rm-safely-undo-stack.tmp"
       ],
       "denyWrite": [
-        "/bin",
-        "/usr",
-        "/lib",
-        "/lib64",
-        "/opt",
-        "/sbin",
-        "/System",
-        "/Applications",
-        "/etc",
-        "/var",
-        "/root"
+        "//bin",
+        "//usr",
+        "//lib",
+        "//lib64",
+        "//opt",
+        "//sbin",
+        "//System",
+        "//Applications",
+        "//etc",
+        "//var",
+        "//root"
       ],
       "denyRead": [
         "~/.ssh",
@@ -132,16 +134,15 @@
         "~/Music",
         "~/Movies",
         "~/Library",
-        "/root",
-        "/etc",
-        "/var",
-        "/System",
-        "/Applications"
+        "//root",
+        "//etc",
+        "//var",
+        "//System",
+        "//Applications"
       ],
       "allowRead": [
-        "~/.Trash",
-        "/tmp",
-        "/private/tmp"
+        "~/.ssh/config",
+        "~/.Trash"
       ]
     }
   }
