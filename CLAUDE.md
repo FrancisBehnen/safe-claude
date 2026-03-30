@@ -64,6 +64,18 @@ Some sandbox blocks aren't obvious from the command itself. A command like `git 
 2. Check what config files the tool reads: `git config --show-origin credential.helper`, `npm config ls -l`, etc.
 3. If the config lives in a denied path (`/etc`, `/opt`, `/var`, `/Library`), add the specific file to `allowRead` — not the whole directory.
 
+**Last resort: `excludedCommands`**
+
+If a command needs network access (SSH, raw TCP), Unix sockets (SSH agent), or system-level config files that can't all be individually whitelisted, exclude it from the sandbox entirely using `sandbox.excludedCommands`. The command runs completely unsandboxed, so only use this when targeted fixes (`allowRead`, `allowWrite`, `allowedDomains`) can't solve the problem. Gate destructive variants via `permissions.ask` instead.
+
+Example: `git push` over SSH needs outbound TCP on port 22, the SSH agent socket, SSH keys, and known_hosts — too many sandbox layers to fix individually.
+
+```json
+"sandbox": {
+  "excludedCommands": ["git"]
+}
+```
+
 ## After applying the fix
 
 Once the fix is in place, propose:

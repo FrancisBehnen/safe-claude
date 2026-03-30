@@ -59,6 +59,20 @@ git config --show-origin credential.helper
 
 Then add the specific file (not the whole directory) to `allowRead` in settings.
 
+### Last resort: `excludedCommands`
+
+If targeted fixes aren't enough — e.g. a command needs outbound TCP, Unix sockets, and system config files all at once — you can exclude it from the sandbox entirely:
+
+```json
+"sandbox": {
+  "excludedCommands": ["git"]
+}
+```
+
+The command runs completely unsandboxed, so use `permissions.ask` to gate destructive variants (e.g. `git push --force`). Only use this when `allowRead`, `allowWrite`, and `allowedDomains` can't solve the problem.
+
+Example: `git push` over SSH needs port 22 TCP, the SSH agent socket, SSH keys, and known_hosts — too many sandbox layers to fix individually.
+
 ## Updating
 
 After editing `~/.claude/settings.json` or `~/.claude/rules/common/sandbox.md`, run:
