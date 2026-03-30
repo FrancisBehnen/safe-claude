@@ -109,7 +109,8 @@
         "~/.config",
         "~/.gitconfig",
         "~/.rm-safely-undo-stack",
-        "~/.rm-safely-undo-stack.tmp"
+        "~/.rm-safely-undo-stack.tmp",
+        "~/.bun"
       ],
       "denyWrite": [
         "//bin",
