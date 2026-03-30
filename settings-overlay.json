@@ -65,11 +65,11 @@
       "Edit(/etc/**)"
     ],
     "ask": [
-      "Bash(git push --force*)",
-      "Bash(git push -f*)",
-      "Bash(git push origin --force*)",
-      "Bash(git reset --hard*)",
-      "Bash(git clean -fdx*)",
+      "Bash(git*push*--force*)",
+      "Bash(git*push*-f *)",
+      "Bash(git*push*-f)",
+      "Bash(git*reset*--hard*)",
+      "Bash(git*clean*-fdx*)",
       "Bash(sudo *)",
       "Bash(chown *)",
       "Bash(chmod 7*)",
