@@ -53,6 +53,17 @@ Possible changes:
 
 Some fixes require both — e.g. a new pattern for sandbox.md AND a new allowWrite path in settings.json. Apply both.
 
+## Debugging hidden path dependencies
+
+Some sandbox blocks aren't obvious from the command itself. A command like `git push` may fail not because `git` or `push` is blocked, but because git internally reads a config file from a denied path.
+
+**Example:** `git push` over HTTPS fails with `could not read Username` — but SSH and manual pushes work fine. The root cause: git's credential helper is configured in `/opt/local/etc/gitconfig`, which falls under the sandbox's `/etc` deny-read rule. Git can't read its own credential config, so it can't authenticate.
+
+**How to debug:**
+1. Run the command manually outside Claude Code — does it work? If yes, the sandbox is blocking something.
+2. Check what config files the tool reads: `git config --show-origin credential.helper`, `npm config ls -l`, etc.
+3. If the config lives in a denied path (`/etc`, `/opt`, `/var`, `/Library`), add the specific file to `allowRead` — not the whole directory.
+
 ## After applying the fix
 
 Once the fix is in place, propose:

@@ -46,6 +46,19 @@ When a command is blocked by the sandbox and the unsandboxed retry succeeds:
 2. **Diagnose** — Open Claude Code in the safe-claude repo and share the screenshot. Ask it why the original command was blocked and to fix it — either by adding a pattern to `rules/common/sandbox.md` or by updating `settings-overlay.json` (e.g. adding a path to the sandbox allowlist or a permission).
 3. **Sync** — Run `./sync.sh` to propagate the fix, then commit and push.
 
+### Hidden path dependencies
+
+Some failures aren't obvious from the command. For example, `git push` over HTTPS may fail with `could not read Username` — not because git or push is blocked, but because git's credential helper is configured in `/opt/local/etc/gitconfig`, which the sandbox denies reading (it falls under `/etc`).
+
+To debug: run the command manually (`! git push`) — if it works, the sandbox is blocking an internal file read. Use tool-specific commands to find which config file is involved:
+
+```bash
+git config --show-origin credential.helper
+# → file:/opt/local/etc/gitconfig    osxkeychain
+```
+
+Then add the specific file (not the whole directory) to `allowRead` in settings.
+
 ## Updating
 
 After editing `~/.claude/settings.json` or `~/.claude/rules/common/sandbox.md`, run:
