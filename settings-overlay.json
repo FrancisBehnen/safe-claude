@@ -91,9 +91,6 @@
   "sandbox": {
     "enabled": true,
     "allowUnsandboxedCommands": true,
-    "excludedCommands": [
-      "git"
-    ],
     "network": {
       "allowedDomains": [
         "srv1407177.hstgr.cloud",
@@ -149,6 +146,11 @@
         "~/.ssh/config",
         "~/.Trash"
       ]
-    }
+    },
+    "excludedCommands": [
+      "git",
+      "/usr/bin/git",
+      "config"
+    ]
   }
 }

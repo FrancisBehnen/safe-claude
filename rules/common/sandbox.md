@@ -87,6 +87,12 @@ Blocked: `git status`
 Fix:     `git -C /absolute/path/to/repo status`
 Why:     The sandbox intercepts the `getcwd()` syscall. Using `-C` tells git the repo path explicitly, bypassing the syscall.
 
+### Shell aliases not matched by excludedCommands
+
+Blocked: `config status` (where `config` is an alias for `/usr/bin/git --git-dir=... --work-tree=...`)
+Fix:     Add the alias name (`config`) and the full binary path (`/usr/bin/git`) to `sandbox.excludedCommands` alongside `git`.
+Why:     `excludedCommands` matches on the command name the sandbox sees. A shell alias expands to a different name than what's listed, so the sandbox applies restrictions — blocking reads like `/var/db/xcode_select_link` that xcode-select needs internally.
+
 ---
 
 ## Adding New Patterns
